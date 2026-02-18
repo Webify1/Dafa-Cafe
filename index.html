@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+body{
+  background:#111;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:Arial;
+}
+
+.clock{
+  display:flex;
+  gap:15px;
+}
+
+.box{
+  text-align:center;
+}
+
+.num{
+  background:black;
+  padding:20px 25px;
+  font-size:55px;
+  border-radius:12px;
+  box-shadow:0 8px 0 #333;
+  min-width:90px;
+}
+
+.label{
+  margin-top:8px;
+  font-size:14px;
+  opacity:.7;
+}
+</style>
+
+</head>
+<body>
+
+<div class="clock">
+
+<div class="box">
+<div class="num" id="days">00</div>
+<div class="label">DAYS</div>
+</div>
+
+<div class="box">
+<div class="num" id="hours">00</div>
+<div class="label">HOURS</div>
+</div>
+
+<div class="box">
+<div class="num" id="minutes">00</div>
+<div class="label">MIN</div>
+</div>
+
+<div class="box">
+<div class="num" id="seconds">00</div>
+<div class="label">SEC</div>
+</div>
+
+</div>
+
+<script>
+
+const target = new Date("April 1, 2026 00:00:00").getTime();
+
+function update(){
+
+  const now = new Date().getTime();
+  const diff = target - now;
+
+  if(diff<=0){
+    document.body.innerHTML="<h1>OPEN</h1>";
+    return;
+  }
+
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("days").textContent=d;
+  document.getElementById("hours").textContent=h;
+  document.getElementById("minutes").textContent=m;
+  document.getElementById("seconds").textContent=s;
+
+}
+
+setInterval(update,1000);
+update();
+
+</script>
+
+</body>
+</html>
